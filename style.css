@@ -1,0 +1,302 @@
+/* ============================================
+   Al Barq — Dubai car rental landing page
+   ============================================ */
+
+:root{
+  --ink: #0B0F14;
+  --ink-soft: #151C25;
+  --brass: #C89B3C;
+  --brass-light: #E4C77C;
+  --sand: #EFE9DA;
+  --paper: #F8F5EE;
+  --text-dark: #191E24;
+  --muted: #6B7280;
+  --line: rgba(200,155,60,0.35);
+  --line-dark: rgba(255,255,255,0.12);
+
+  --font-display: 'Big Shoulders Display', sans-serif;
+  --font-body: 'Manrope', sans-serif;
+
+  --radius: 4px;
+  --wrap: 1160px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+body{
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--paper);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg{ display:block; max-width:100%; }
+a{ color: inherit; text-decoration: none; }
+ul{ list-style: none; margin:0; padding:0; }
+h1,h2,h3{ font-family: var(--font-display); font-weight: 700; line-height: 1.05; margin: 0; }
+p{ margin: 0; }
+button{ font-family: inherit; }
+
+.wrap{ max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
+
+.skip-link{
+  position:absolute; left:-999px; top:auto;
+  background:var(--brass); color:var(--ink); padding: 10px 16px; z-index: 200;
+}
+.skip-link:focus{ left: 16px; top: 16px; }
+
+:focus-visible{ outline: 2px solid var(--brass); outline-offset: 2px; }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding: 13px 26px;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, border-color .15s ease;
+}
+.btn-primary{ background: var(--brass); color: var(--ink); }
+.btn-primary:hover{ background: var(--brass-light); }
+.btn-ghost{ border-color: var(--line); color: var(--text-dark); }
+.btn-ghost:hover{ border-color: var(--brass); background: rgba(200,155,60,0.08); }
+.btn-block{ width: 100%; }
+
+/* ---------- header ---------- */
+.site-header{
+  position: fixed; top:0; left:0; right:0; z-index: 100;
+  padding: 18px 0;
+  transition: background-color .2s ease, padding .2s ease, box-shadow .2s ease;
+}
+.site-header.is-scrolled{
+  background: rgba(11,15,20,0.92);
+  backdrop-filter: blur(6px);
+  padding: 12px 0;
+  box-shadow: 0 1px 0 var(--line);
+}
+.header-inner{ display:flex; align-items:center; justify-content:space-between; gap: 24px; }
+
+.logo{ display:flex; align-items:center; gap:10px; color: var(--paper); }
+.logo-mark{ color: var(--brass); flex-shrink:0; }
+.logo-text{
+  font-family: var(--font-display); font-weight: 800; font-size: 1.35rem;
+  line-height: 1; letter-spacing: 0.2px;
+  display:flex; flex-direction:column;
+}
+.logo-text small{
+  font-family: var(--font-body); font-weight: 600; font-size: 0.62rem;
+  letter-spacing: 0.06em; color: var(--brass-light); margin-top: 3px;
+}
+
+.main-nav{ display:flex; align-items:center; gap: 30px; }
+.main-nav a{ color: var(--paper); font-weight: 600; font-size: 0.95rem; opacity: 0.9; }
+.main-nav a:hover{ opacity: 1; color: var(--brass-light); }
+.nav-cta{
+  background: var(--brass); color: var(--ink) !important; opacity: 1 !important;
+  padding: 10px 20px; border-radius: var(--radius);
+}
+.nav-cta:hover{ background: var(--brass-light); }
+
+.nav-toggle{
+  display:none; background:none; border:none; cursor:pointer; padding: 8px;
+  flex-direction:column; gap:5px;
+}
+.nav-toggle span{ width: 22px; height: 2px; background: var(--paper); display:block; }
+
+/* ---------- hero ---------- */
+.hero{ position: relative; min-height: 720px; display:flex; align-items:flex-end; overflow:hidden; }
+.hero-bg{ position:absolute; inset:0; z-index:0; }
+.skyline{ position:absolute; inset:0; width:100%; height:100%; }
+.car-silhouette{
+  position:absolute; left: -260px; bottom: 6%; width: 260px; height: auto; z-index:1;
+  transition: left 1.4s cubic-bezier(.2,.7,.3,1);
+}
+.car-silhouette.is-in{ left: 8%; }
+
+.hero-inner{
+  position:relative; z-index: 2;
+  display:grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px;
+  align-items:end; padding-top: 200px; padding-bottom: 72px; width:100%;
+}
+.hero-copy{
+  opacity: 0; transform: translateY(14px);
+  animation: heroIn .7s ease forwards .15s;
+}
+.hero h1{
+  color: var(--paper); font-size: clamp(2.6rem, 5vw, 4.2rem);
+  max-width: 11ch;
+}
+.hero-sub{
+  color: rgba(248,245,238,0.78); font-size: 1.1rem; max-width: 46ch;
+  margin-top: 20px;
+}
+
+.booking-card{
+  background: rgba(21,28,37,0.88);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px;
+  backdrop-filter: blur(6px);
+  opacity: 0; transform: translateY(14px);
+  animation: heroIn .7s ease forwards .35s;
+}
+.field{ margin-bottom: 16px; }
+.field label{
+  display:block; font-size: 0.78rem; font-weight: 700; color: var(--brass-light);
+  margin-bottom: 7px;
+}
+.field-row{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field select, .field input{
+  width:100%; padding: 12px 14px; border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.18); background: rgba(11,15,20,0.6);
+  color: var(--paper); font-family: var(--font-body); font-size: 0.95rem;
+}
+.field select:focus, .field input:focus{ border-color: var(--brass); }
+.field select option{ color: var(--ink); }
+.booking-note{
+  color: var(--brass-light); font-size: 0.85rem; margin-top: 12px; min-height: 1.2em;
+}
+
+@keyframes heroIn{ to{ opacity: 1; transform: translateY(0); } }
+
+/* ---------- stats ---------- */
+.stats{ background: var(--ink); padding: 44px 0; }
+.stats-inner{ display:flex; flex-wrap:wrap; gap: 36px; justify-content: space-between; }
+.stat{ display:flex; flex-direction:column; gap: 4px; }
+.stat-num{ font-family: var(--font-display); font-weight: 800; font-size: 2.6rem; color: var(--brass); line-height:1; }
+.stat-label{ color: rgba(248,245,238,0.7); font-size: 0.95rem; }
+
+/* ---------- section head ---------- */
+.section-head{ max-width: 620px; margin-bottom: 48px; }
+.section-head h2{ font-size: clamp(1.8rem, 3.2vw, 2.5rem); color: var(--text-dark); }
+.section-head p{ margin-top: 16px; color: var(--muted); font-size: 1.05rem; }
+
+/* ---------- fleet ---------- */
+.fleet{ padding: 96px 0; }
+.fleet-grid{
+  display:grid; grid-template-columns: 1.4fr 1fr 1fr; grid-auto-rows: auto;
+  gap: 20px;
+}
+.car-card{
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--sand);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.car-card--featured{ grid-row: 1 / 3; grid-column: 1; }
+.car-visual{
+  background: var(--ink); padding: 28px 24px; color: var(--brass);
+  display:flex; align-items:center; justify-content:center;
+}
+.car-card--featured .car-visual{ padding: 50px 24px; }
+.car-icon{ width: 100%; max-width: 220px; }
+.car-body{ padding: 22px 24px 24px; display:flex; flex-direction:column; gap: 10px; flex:1; }
+.car-tag{
+  font-size: 0.75rem; font-weight: 700; color: var(--brass); text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.car-body h3{ font-size: 1.35rem; color: var(--text-dark); }
+.car-card--featured .car-body h3{ font-size: 1.7rem; }
+.car-specs{ display:flex; gap: 16px; flex-wrap:wrap; margin-top: 4px; }
+.car-specs li{ font-weight: 800; font-family: var(--font-display); font-size: 1.05rem; color: var(--text-dark); }
+.car-specs li span{ display:block; font-family: var(--font-body); font-weight: 500; font-size: 0.72rem; color: var(--muted); }
+.car-foot{ margin-top: auto; padding-top: 14px; display:flex; align-items:center; justify-content:space-between; border-top: 1px solid var(--line); }
+.car-price{ font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; color: var(--text-dark); }
+.car-price small{ font-family: var(--font-body); font-weight: 600; font-size: 0.8rem; color: var(--muted); }
+
+/* ---------- why ---------- */
+.why{ background: var(--ink); padding: 96px 0; color: var(--paper); }
+.why-inner{ display:grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; }
+.why-head h2{ font-size: clamp(1.8rem, 3.2vw, 2.5rem); max-width: 12ch; }
+.why-list{ display:grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.why-list li{ border-top: 2px solid var(--brass); padding-top: 16px; }
+.why-list h3{ font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.why-list p{ color: rgba(248,245,238,0.72); font-size: 0.98rem; }
+
+/* ---------- locations ---------- */
+.locations{ padding: 96px 0; }
+.location-list{ border-top: 1px solid var(--line); }
+.location-list li{
+  display:grid; grid-template-columns: 1.2fr 1.6fr 1fr; gap: 16px;
+  padding: 20px 0; border-bottom: 1px solid var(--line);
+  align-items:center;
+}
+.loc-name{ font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; }
+.loc-detail{ color: var(--muted); }
+.loc-hours{ color: var(--brass); font-weight: 700; font-size: 0.9rem; justify-self:start; }
+
+/* ---------- testimonial ---------- */
+.testimonial{ background: var(--sand); padding: 96px 0; }
+.testimonial-inner{ max-width: 780px; }
+.testimonial blockquote{ margin:0; border-left: 3px solid var(--brass); padding-left: 28px; }
+.testimonial p{ font-family: var(--font-display); font-weight: 600; font-size: clamp(1.3rem, 2.6vw, 1.9rem); color: var(--text-dark); line-height: 1.3; }
+.testimonial footer{ margin-top: 20px; color: var(--muted); font-weight: 600; font-size: 0.95rem; }
+
+/* ---------- cta ---------- */
+.cta{ background: var(--ink); padding: 90px 0; text-align:center; }
+.cta-inner{ display:flex; flex-direction:column; align-items:center; gap: 16px; }
+.cta h2{ color: var(--paper); font-size: clamp(1.9rem, 3.6vw, 2.7rem); max-width: 18ch; }
+.cta p{ color: rgba(248,245,238,0.72); font-size: 1.05rem; }
+.cta .btn{ margin-top: 12px; }
+
+/* ---------- footer ---------- */
+.site-footer{ background: var(--ink-soft); color: var(--paper); padding: 64px 0 0; }
+.footer-inner{
+  display:grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px;
+  padding-bottom: 48px; border-bottom: 1px solid var(--line-dark);
+}
+.footer-brand p{ margin-top: 14px; color: rgba(248,245,238,0.6); font-size: 0.9rem; max-width: 26ch; }
+.footer-col h4{ font-size: 0.85rem; letter-spacing: 0.03em; color: var(--brass-light); margin-bottom: 14px; }
+.footer-col p{ margin-bottom: 8px; }
+.footer-col a{ color: rgba(248,245,238,0.75); }
+.footer-col a:hover{ color: var(--brass-light); }
+.social-row{ display:flex; gap: 12px; }
+.social-row a{ width: 36px; height:36px; border: 1px solid var(--line-dark); border-radius: var(--radius); display:flex; align-items:center; justify-content:center; }
+.social-row a:hover{ border-color: var(--brass); color: var(--brass); }
+.footer-bottom{ padding: 20px 24px; }
+.footer-bottom p{ color: rgba(248,245,238,0.5); font-size: 0.82rem; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px){
+  .hero-inner{ grid-template-columns: 1fr; padding-top: 160px; }
+  .booking-card{ max-width: 440px; }
+  .fleet-grid{ grid-template-columns: 1fr 1fr; }
+  .car-card--featured{ grid-column: 1 / 3; grid-row: auto; }
+  .why-inner{ grid-template-columns: 1fr; }
+  .why-list{ grid-template-columns: 1fr 1fr; }
+  .footer-inner{ grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 680px){
+  .main-nav{
+    position: fixed; top: 0; right: 0; height: 100vh; width: min(78vw, 320px);
+    background: var(--ink); flex-direction:column; align-items:flex-start;
+    padding: 96px 28px 28px; gap: 22px;
+    transform: translateX(100%); transition: transform .25s ease;
+  }
+  .main-nav.is-open{ transform: translateX(0); }
+  .nav-toggle{ display:flex; }
+  .nav-cta{ margin-top: 8px; }
+
+  .hero{ min-height: auto; }
+  .hero-inner{ padding-top: 130px; padding-bottom: 48px; }
+  .field-row{ grid-template-columns: 1fr; }
+  .car-silhouette{ width: 180px; }
+
+  .fleet-grid{ grid-template-columns: 1fr; }
+  .car-card--featured{ grid-column: 1; }
+  .why-list{ grid-template-columns: 1fr; }
+  .location-list li{ grid-template-columns: 1fr; gap: 4px; }
+  .loc-hours{ justify-self:start; }
+  .footer-inner{ grid-template-columns: 1fr; }
+  .stats-inner{ gap: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  .hero-copy, .booking-card{ animation: none; opacity: 1; transform:none; }
+  .car-silhouette{ transition: none; left: 8%; }
+}
